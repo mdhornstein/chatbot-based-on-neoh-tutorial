@@ -1,2 +1,4 @@
 # chatbot-based-on-neoh-tutorial
-We create a chatbot by following a tutorial created by Dickson Neoh. 
+We create a chatbot by following a tutorial created by Dickson Neoh.
+
+The chatbot runs on telegram.  
