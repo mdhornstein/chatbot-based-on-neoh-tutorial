@@ -8,8 +8,9 @@ def display_user_info(user_object) :
     print(f"is_bot: {user_object.is_bot}")
     print(f"first_name: {user_object.first_name}")
 
-
-
+def count_tokens(update):
+    num_tokens = len(update.message.text.split())
+    return num_tokens
 
 async def main(): 
     # Load the API token 
@@ -27,11 +28,34 @@ async def main():
     #         User object."
     async with bot: 
         user_object = await bot.get_me()
+        updates = (await bot.get_updates())
     
     print(f"type(user_object): {type(user_object)}")
     print(user_object)
     print()
     display_user_info(user_object)
+
+    print("************")
+    print("Updates")
+    print("************")
+
+    print(f"type(updates): {type(updates)}")
+    print(updates)
+    print(updates[0])
+    print(updates[1])
+
+    print("************")
+    print("Count Tokens")
+    print("************")
+
+    for update in updates:
+        try: 
+            text = update.message.text
+            num_tokens = count_tokens(update)
+            print(f"message: {text:<20} tokens: {num_tokens:<20}") 
+        except AttributeError:
+            print("attribute error")
+
 
 if __name__ == "__main__":
     asyncio.run(main())
