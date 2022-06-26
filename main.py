@@ -48,13 +48,17 @@ async def main():
     print("Count Tokens")
     print("************")
 
-    for update in updates:
-        try: 
-            text = update.message.text
-            num_tokens = count_tokens(update)
-            print(f"message: {text:<20} tokens: {num_tokens:<20}") 
-        except AttributeError:
-            print("attribute error")
+    async with bot: 
+        for update in updates:
+            try: 
+                text = update.message.text
+                num_tokens = count_tokens(update)
+                token_count_message = f"message: {text:<20} tokens: {num_tokens:<20}"
+                print(token_count_message) 
+                await bot.send_message(text=token_count_message, 
+                                   chat_id=update.message.from_user.id)
+            except AttributeError:
+                print("attribute error")
 
 
 if __name__ == "__main__":
